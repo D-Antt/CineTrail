@@ -10,7 +10,7 @@ const Slider = ({ apiKey, baseUrl }) => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [index, setIndex] = useState(0);
   const [movieRatings, setMovieRatings] = useState([]);
-  const imageBaseUrl = 'https://image.tmdb.org/t/p/original';
+  const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
   //   console.log(baseUrl + " " + apiKey);
 
   //   console.log(`${baseUrl}/movie/upcoming?api_key=${apiKey}`);
@@ -26,7 +26,7 @@ const Slider = ({ apiKey, baseUrl }) => {
 
   const sliderStyle = {
     backgroundImage: `url("${imageBaseUrl}${upcomingMovies[index]?.backdrop_path}")`,
-    backgroudSize: "cover",
+    backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     height: "60vh",
