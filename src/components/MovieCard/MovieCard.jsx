@@ -21,7 +21,11 @@ const MovieCard = ({ width, height, movie, radius, cardStyle, imageUrl }) => {
 
   return (
     <Link
-      to={`/moviedetails/${movie?.id}`}
+      to={
+        movie.id
+          ? `/moviedetails/${movie?.id}`
+          : `/moviedetails/${movie?.tmdb_id}`
+      }
       className={cardStyle}
       key={movie?.id}
     >

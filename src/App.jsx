@@ -1,25 +1,46 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ThemeContextProvider from "./contexts/ThemeContext";
-import HomePage from "/Users/danielanttila/Desktop/Portfolio/CineTrail/src/pages/Homepage/Homepage.jsx";
+import CombinedContextProvider from "./contexts/index";
+import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import SignIn from "./pages/SignIn/SignIn";
+import SignUp from "./pages/SignUp/SignUp";
+import MyFavorites from "./pages/MyFavorites/MyFavorites";
+import HomePage from "./pages/Homepage/Homepage";
 
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const serverUrl = import.meta.env.VITE_SERVER_URL;
 
   return (
-    <ThemeContextProvider>
+    <CombinedContextProvider>
       <BrowserRouter>
-        <Header />
+        <Header apiKey={apiKey} baseUrl={baseUrl} />
         <Routes>
           <Route
             path="/"
             element={<HomePage apiKey={apiKey} baseUrl={baseUrl} />}
           />
+          <Route
+            path={"/movieDetails/:movieId"}
+            element={
+              <MovieDetails
+                apiKey={apiKey}
+                baseUrl={baseUrl}
+                serverUrl={serverUrl}
+              />
+            }
+          />
+          <Route
+            path="/myfavorites"
+            element={<MyFavorites serverUrl={serverUrl} />}
+          />
+          <Route path="/signup" element={<SignUp serverUrl={serverUrl} />} />
+          <Route path="/signin" element={<SignIn serverUrl={serverUrl} />} />
         </Routes>
       </BrowserRouter>
-    </ThemeContextProvider>
+    </CombinedContextProvider>
   );
 }
 
